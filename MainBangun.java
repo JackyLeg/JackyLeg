@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
-import Segitiga.BuatBangun0;
-
-public abstract class Bangun2D{
+abstract class Bangun2D{
 	int id, p, t, l;
 	public Bangun2D(int id_bangun, int p_bangun, int t_bangun){
 		id_bangun = id;
@@ -11,7 +9,6 @@ public abstract class Bangun2D{
 	}
 	public Bangun2D(){
 	}
-
 	abstract int hitungLuas();
 	
 	abstract void deskripsi();
@@ -28,78 +25,21 @@ public abstract class Bangun2D{
 	public void setTinggi(int tNew){
 		t = tNew;
 	}
-	abstract void buatObjek();
-	/*{
-		Scanner inp = new Scanner(System.in);
-		//int p_bangun, t_bangun;
-		System.out.println("Objek ID = 0");
-		System.out.print("Panjang? ");
-		int inputPanjang = inp.nextInt();
-		System.out.print("Tinggi? ");
-		int inputTinggi = inp.nextInt();
-		int p_bangun = inputPanjang;
-		int t_bangun = inputTinggi;
-		Bangun2D bangun = new Bangun2D(0, p_bangun, t_bangun);
-		System.out.println("Objek berhasil dibuat");
-	}*/
 }
-public class Segitiga extends Bangun2D{
+class Segitiga extends Bangun2D{
 	public Segitiga(int id_bangun, int p_bangun, int t_bangun){
 		super(id_bangun, p_bangun, t_bangun);
-	}
-	public Segitiga(){
-	}
-
-	//@Override
-	public void buatObjek(){
-		Scanner inp = new Scanner(System.in);
-		//int p_bangun, t_bangun;
-		System.out.println("Objek ID = 1");
-		System.out.print("Panjang? ");
-		int inputPanjang = inp.nextInt();
-		System.out.print("Tinggi? ");
-		int inputTinggi = inp.nextInt();
-		int p_bangun = inputPanjang;
-		int t_bangun = inputTinggi;
-		Segitiga bangunSegitiga = new Segitiga(1, p_bangun, t_bangun);
-		System.out.print("Objek segitiga berhasil dibuat");
-	}
-	public void ubahAtribut(){
-		Scanner inp = new Scanner(System.in);
-		System.out.print("Objek ID? ");
-		int tanyaId = inp.nextInt();
-		
 	}
 	public int hitungLuas(){
 		return (p * t) / 2;
 	}
 	public void deskripsi(){
-		System.out.println("Segitiga\n[ID = 1;  Panjang =" + p + "Tinggi =" + t + "Luas =" + l + "]");
+		System.out.println("Segiempat\n[ID = 2;  Panjang =" + p + "Tinggi =" + t + "Luas =" + l + "]");
 	}
 }
-public class Segiempat extends Bangun2D{
+class Segiempat extends Bangun2D{
 	public Segiempat(int id_bangun, int p_bangun, int t_bangun){
 		super(id_bangun, p_bangun, t_bangun);
-	}
-	public Segiempat(){
-	}
-	//@Override
-	public void buatObjek(){
-		Scanner inp = new Scanner(System.in);
-		//int p_bangun, t_bangun;
-		System.out.println("Objek ID = 2");
-		System.out.print("Panjang? ");
-		int inputPanjang = inp.nextInt();
-		System.out.print("Tinggi? ");
-		int inputTinggi = inp.nextInt();
-		int p_bangun = inputPanjang;
-		int t_bangun = inputTinggi;
-		System.out.print("Objek segiempat berhasil dibuat");
-	}
-	public void ubahAtribut(){
-		Scanner inp = new Scanner(System.in);
-		System.out.print("Objek ID? ");
-		int tanyaId = inp.nextInt();
 	}
 	public int hitungLuas(){
 		return p * t;
@@ -118,6 +58,8 @@ public class MainBangun{
 	public static void main (String args[]){
 		Scanner inp = new Scanner(System.in);
 		int pilih;
+		int countId = 1;
+		Bangun2D[] arrBangun = new Bangun2D[100];
 		for(;;){
 			pilih = TampilMenu();
 			if (pilih == 1){
@@ -125,13 +67,23 @@ public class MainBangun{
 				int menu1 = inp.nextInt();
 				for (;;){
 					if (menu1 == 0){
-						Segitiga buat0 = new Segitiga();
-						buat0.buatObjek();
+						System.out.println("Nomor ID: " + countId);
+						System.out.println("Alas? ");
+						int alas = inp.nextInt();
+						System.out.println("Tinggi? ");
+						int tinggi = inp.nextInt();
+						arrBangun[countId] = new Segitiga(countId, alas, tinggi);
+						countId++;
 						break;
 					}
 					else if (menu1 == 1){
-						Segiempat buat1 = new Segiempat();
-						buat1.buatObjek();
+						System.out.println("Nomor ID: " + countId);
+						System.out.println("Panjang? ");
+						int panjang = inp.nextInt();
+						System.out.println("Lebar? ");
+						int lebar = inp.nextInt();
+						arrBangun[countId] = new Segiempat(countId, panjang, lebar);
+						countId++;
 						break;
 					}
 					else{
