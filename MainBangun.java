@@ -1,59 +1,78 @@
 import java.util.Scanner;
 
 abstract class Bangun2D{
-	int id, p, t, l;
-	public Bangun2D(int id_bangun, int p_bangun, int t_bangun){
+	int id;
+	float p, t, l;
+	/*public Bangun2D(int id_bangun, float p_bangun, float t_bangun){
 		id_bangun = id;
 		p_bangun = p;
 		t_bangun = t;
-	}
-	public Bangun2D(){
-	}
-	abstract int hitungLuas();
+	}*/
+	abstract float hitungLuas();
 	
-	abstract void deskripsi();
-	
-	public int getPanjang(){
+	public void deskripsi(){
+		System.out.println("Ini adalah sebuah bangun datar");
+	}
+	public int getId(){
+		return id;
+	}
+	public float getPanjang(){
 		return p;
 	}
-	public int getTinggi(){
+	public float getTinggi(){
 		return t;
 	}
-	public void setPanjang(int pNew){
+	public void setPanjang(float pNew){
 		p = pNew;
 	}
-	public void setTinggi(int tNew){
+	public void setTinggi(float tNew){
 		t = tNew;
 	}
 }
 class Segitiga extends Bangun2D{
-	public Segitiga(int id_bangun, int p_bangun, int t_bangun){
-		super(id_bangun, p_bangun, t_bangun);
+	public Segitiga(int id_bangun, float p_bangun, float t_bangun){
+		//super(id_bangun, p_bangun, t_bangun);
+		//super(id_bangun, p_bangun, t_bangun);
+		id = id_bangun;
+		p = p_bangun;
+		t = t_bangun;
 	}
-	public int hitungLuas(){
-		return (p * t) / 2;
+	public float hitungLuas(){
+		l = (p * t) / 2;
+		return l;
 	}
+	@Override
 	public void deskripsi(){
-		System.out.println("Segiempat\n[ID = 2;  Panjang =" + p + "Tinggi =" + t + "Luas =" + l + "]");
+		System.out.println("[Bangun = Segitiga; ID = " + id + "; Alas = " + p + "cm; Tinggi = " + t + "cm; Luas = " + hitungLuas() + "cm^2]");
 	}
 }
 class Segiempat extends Bangun2D{
-	public Segiempat(int id_bangun, int p_bangun, int t_bangun){
-		super(id_bangun, p_bangun, t_bangun);
+	public Segiempat(int id_bangun, float p_bangun, float t_bangun){
+		//super(id_bangun, p_bangun, t_bangun);
+		id = id_bangun;
+		p = p_bangun;
+		t = t_bangun;
 	}
-	public int hitungLuas(){
-		return p * t;
+	public float hitungLuas(){
+		l = p * t;
+		return l;
 	}
+	@Override
 	public void deskripsi(){
-		System.out.println("Segiempat\n[ID = 2;  Panjang =" + p + "Tinggi =" + t + "Luas =" + l + "]");
+		System.out.println("[Bangun = Segiempat; ID = " + id + "; Panjang = " + p + "cm; Lebar = " + t + "; Luas = " + hitungLuas() + "cm^2]");
 	}
 }
 public class MainBangun{
 	public static int TampilMenu(){
 		Scanner inp = new Scanner(System.in);
-		System.out.println("Simulasi Bangun\n1. Buat objek bangun\n2. Ubah atribut\n3. Deskripsi sebuah objek\n4. Deskripsi semua objek\n5. Keluar program");
+		System.out.println("\nSimulasi Bangun\n1. Buat objek bangun\n2. Ubah atribut\n3. Deskripsi sebuah objek\n4. Deskripsi semua objek\n5. Keluar program");
 		int menuHome = inp.nextInt();
 		return menuHome;
+	}
+	public static void displayBangun(Bangun2D[] arrBangun){
+		for(int j = 0; j < arrBangun.length ; j++){
+			System.out.println("ID = " + arrBangun[j].getId() + "; Panjang = " + arrBangun[j].getPanjang() + "cm; Tinggi = " + arrBangun[j].getTinggi() + "; Luas = " + arrBangun[j].hitungLuas() + "cm^2");
+		}
 	}
 	public static void main (String args[]){
 		Scanner inp = new Scanner(System.in);
@@ -68,21 +87,23 @@ public class MainBangun{
 				for (;;){
 					if (menu1 == 0){
 						System.out.println("Nomor ID: " + countId);
-						System.out.println("Alas? ");
-						int alas = inp.nextInt();
-						System.out.println("Tinggi? ");
-						int tinggi = inp.nextInt();
+						System.out.print("Alas? ");
+						float alas = inp.nextFloat();
+						System.out.print("Tinggi? ");
+						float tinggi = inp.nextFloat();
 						arrBangun[countId] = new Segitiga(countId, alas, tinggi);
+						System.out.println("Objek Segitiga dengan ID = " + countId + " berhasil dibuat!");
 						countId++;
 						break;
 					}
 					else if (menu1 == 1){
 						System.out.println("Nomor ID: " + countId);
-						System.out.println("Panjang? ");
-						int panjang = inp.nextInt();
-						System.out.println("Lebar? ");
-						int lebar = inp.nextInt();
+						System.out.print("Panjang? ");
+						float panjang = inp.nextFloat();
+						System.out.print("Lebar? ");
+						float lebar = inp.nextFloat();
 						arrBangun[countId] = new Segiempat(countId, panjang, lebar);
+						System.out.println("Objek Segiempat dengan ID = " + countId + "berhasil dibuat!");
 						countId++;
 						break;
 					}
@@ -92,15 +113,31 @@ public class MainBangun{
 				}
 			}
 			else if (pilih == 2){
-				System.out.println("Objek ID?");
+				System.out.println("Objek ID?\n(0-Segitiga atau 1-Segiempat)");//langsung ke objeknya aja
 				int menu2 = inp.nextInt();
-				for (;;){
+				for (;;){//hapus aja perulangan fornya
 					if (menu2 == 0){
-						//jalankan method ubah atribut segitiga
+						System.out.println("Nomor ID?\n(Masukkan angka 1-" + countId + ") ");
+						int id = inp.nextInt();
+						arrBangun[id].deskripsi();
+						System.out.print("Masukkan alas baru: ");
+						float al = inp.nextFloat();
+						System.out.print("Masukkan tinggi baru: ");
+						float ti = inp.nextFloat();
+						arrBangun[id].setPanjang(al);
+						arrBangun[id].setTinggi(ti);
 						break;
 					}
 					else if (menu2 == 1){
-						//jalankan method ubah atribut segiempat
+						System.out.println("Nomor ID?\n(Masukkan angka 1-" + countId + ") ");
+						int id = inp.nextInt();
+						arrBangun[id].deskripsi();
+						System.out.print("Masukkan panjang baru: ");
+						float pa = inp.nextFloat();
+						System.out.print("Masukkan lebar baru: ");
+						float le = inp.nextFloat();
+						arrBangun[id].setPanjang(pa);
+						arrBangun[id].setTinggi(le);
 						break;
 					}
 					else{
@@ -109,24 +146,37 @@ public class MainBangun{
 				}
 			}
 			else if (pilih == 3){
-					System.out.println("Objek ID?");
+					System.out.println("Objek ID?");//ini langsung ke objeknya aja
+
 					int menu3 = inp.nextInt();
-					for (;;){
+					for (;;){//hapus aja perulangan fornya
 						if (menu3 == 0){
-							//jalankan method deskripsi segitiga
+							System.out.println("Nomor ID?\n(Masukkan angka 1-" + countId + ") ");
+							int id = inp.nextInt();
+							arrBangun[id].deskripsi();
 							break;
 						}
 						else if (menu3 == 1){
 							//jalankan method deskripsi segiempat
 							break;
 						}
-					else{
+						else{
 						System.out.println("Masukkan 0 untuk objek Segitiga atau 1 untuk objek Segiempat");
 					}
 				}
 			}
 			else if (pilih == 4){
-					//tampilkan deskripsi semua objek
+					//displayBangun(arrBangun);
+					for(int j = 0; j < countId; j++){
+						System.out.println("ID = " + j + "; Panjang = " + arrBangun[j].getPanjang() + "cm; Tinggi = " + arrBangun[j].getTinggi() + "; Luas = " + arrBangun[j].hitungLuas() + "cm^2");
+						//arrBangun[j].deskripsi();
+					}
+						/*System.out.println("ID = " + j + "; Panjang = " + arrBangun[j].getPanjang() + "cm; Tinggi = " + arrBangun[j].getTinggi() + "; Luas = " + arrBangun[j].hitungLuas() + "cm^2");
+					break;
+					//	if(j == arrBangun.length){
+					//		break;
+					//	}
+					}*/
 				}
 			else if (pilih == 5){
 					break;
