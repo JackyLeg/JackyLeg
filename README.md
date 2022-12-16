@@ -1,5 +1,5 @@
-### Hello erryone! 👋
-
+### Hello everyone! 👋
+**
 <!--
 This a ✨ _special_ ✨ repository because its ✨ _`mine`_ ✨
 
