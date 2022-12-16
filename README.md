@@ -1,10 +1,10 @@
 ### Hello everyone! 👋
 **
-This a ✨ _special_ ✨ repository because its ✨ _`mine`_ ✨
+This a _special_ repository because its ✨ _`mine`_ ✨
 
 Thanks for comin', hope u be patience bcs nothin' to see in here yet 🥲, 
 
-While waiting for that, why don't we know each other?
+While waiting for that, why don't **we know each other**?
 
 - 🏫 I'm currently studying Informatics Engineering
 - 🇮🇩 I'm from Indonesia, and an Indonesian too!
